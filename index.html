@@ -4,401 +4,466 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<meta name="description" content="فیلم‌نما؛ مرجع معرفی فیلم‌ها و سریال‌های ایرانی. ساخته کوروش غلامی.">
-<meta name="keywords" content="فیلم ایرانی, سریال ایرانی, فیلم نما, فیلم‌نما, کوروش غلامی">
-<meta name="author" content="کوروش غلامی">
-
 <title>فیلم‌نما | فیلم و سریال ایرانی</title>
 
 <style>
+
 *{
     box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-html{
-    scroll-behavior:smooth;
+:root{
+    --bg:#0b0b0f;
+    --card:#15151c;
+    --card2:#1d1d26;
+    --text:#fff;
+    --muted:#a7a7b3;
+    --accent:#e50914;
+    --border:#292934;
+    --input:#17171f;
+}
+
+body.light{
+    --bg:#f3f3f5;
+    --card:#ffffff;
+    --card2:#eeeeF2;
+    --text:#15151a;
+    --muted:#666672;
+    --accent:#d90012;
+    --border:#ddddE5;
+    --input:#ffffff;
 }
 
 body{
-    margin:0;
+    background:var(--bg);
+    color:var(--text);
     font-family:Tahoma,Arial,sans-serif;
-    background:#08090d;
-    color:#fff;
     transition:.3s;
-}
-
-/* LIGHT MODE */
-body.light{
-    background:#f3f4f6;
-    color:#151515;
-}
-
-body.light .header,
-body.light nav,
-body.light .movie,
-body.light .section-box{
-    background:#fff;
-    color:#151515;
-}
-
-body.light .search,
-body.light select{
-    background:#eee;
-    color:#111;
 }
 
 /* HEADER */
 
-.header{
-    padding:45px 20px;
+header{
+    padding:35px 20px 25px;
     text-align:center;
-    background:
-    radial-gradient(circle at top,#4d183d,#130b17 55%,#08090d);
-    border-bottom:1px solid #39253c;
+    border-bottom:1px solid var(--border);
+    background:linear-gradient(
+        180deg,
+        rgba(229,9,20,.14),
+        transparent
+    );
 }
 
 .logo{
-    font-size:45px;
+    font-size:42px;
     font-weight:bold;
-    color:#ffd447;
-    margin-bottom:10px;
 }
 
 .subtitle{
-    color:#aaa;
+    color:var(--muted);
+    margin-top:10px;
     font-size:16px;
 }
 
 .creator{
-    color:#ffd447;
-    margin-top:15px;
+    color:var(--accent);
+    margin-top:12px;
+    font-weight:bold;
 }
 
 /* NAV */
 
 nav{
+    display:flex;
+    gap:8px;
+    padding:15px;
+    overflow-x:auto;
+    justify-content:center;
     position:sticky;
     top:0;
-    z-index:100;
-    padding:15px;
-    background:#11131a;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-    flex-wrap:wrap;
-    box-shadow:0 5px 20px #0005;
+    z-index:20;
+    background:rgba(11,11,15,.92);
+    backdrop-filter:blur(12px);
+}
+
+body.light nav{
+    background:rgba(243,243,245,.92);
 }
 
 nav button{
-    border:0;
-    background:#252833;
-    color:#fff;
-    padding:11px 17px;
-    border-radius:22px;
+    border:1px solid var(--border);
+    background:var(--card);
+    color:var(--text);
+    padding:10px 16px;
+    border-radius:10px;
     cursor:pointer;
+    white-space:nowrap;
     transition:.2s;
 }
 
 nav button:hover,
 nav button.active{
-    background:#ffd447;
-    color:#111;
+    background:var(--accent);
+    color:white;
+    border-color:var(--accent);
 }
 
-.theme{
-    background:#4a1839!important;
-    color:#fff!important;
+nav .theme{
+    margin-right:15px;
 }
 
-/* CONTAINER */
+/* MAIN */
 
 .container{
-    width:92%;
-    max-width:1250px;
-    margin:30px auto;
+    width:min(1250px,94%);
+    margin:auto;
 }
 
-/* HERO */
-
 .hero{
-    padding:40px 25px;
-    border-radius:22px;
-    margin-bottom:30px;
-    background:
-    linear-gradient(120deg,#271126,#171018,#101018);
-    border:1px solid #3b253c;
+    text-align:center;
+    padding:55px 20px 35px;
 }
 
 .hero h1{
-    margin-top:0;
-    font-size:30px;
-    color:#ffd447;
+    font-size:34px;
+    margin-bottom:15px;
 }
 
 .hero p{
-    color:#aaa;
+    color:var(--muted);
     line-height:2;
+    max-width:700px;
+    margin:auto;
 }
 
 /* SEARCH */
 
-.search-row{
+.search-area{
     display:flex;
     gap:10px;
-    margin-bottom:25px;
+    max-width:900px;
+    margin:15px auto 45px;
 }
 
 .search{
     flex:1;
-    padding:16px 20px;
-    border-radius:13px;
-    border:1px solid #333640;
+    background:var(--input);
+    border:1px solid var(--border);
+    color:var(--text);
+    border-radius:12px;
+    padding:16px;
     outline:none;
-    background:#15171f;
-    color:white;
-    font-size:16px;
+    font-size:15px;
 }
 
 .search:focus{
-    border-color:#ffd447;
+    border-color:var(--accent);
 }
 
 select{
+    background:var(--input);
+    color:var(--text);
+    border:1px solid var(--border);
+    border-radius:12px;
     padding:0 15px;
-    border-radius:13px;
-    border:1px solid #333640;
-    background:#15171f;
-    color:white;
-    outline:none;
 }
 
-/* SECTIONS */
+/* SECTION */
+
+.section{
+    margin-bottom:50px;
+}
 
 .section-title{
     display:flex;
     justify-content:space-between;
     align-items:center;
-    margin:35px 0 18px;
+    margin-bottom:20px;
 }
 
 .section-title h2{
-    margin:0;
-    color:#ffd447;
+    font-size:24px;
 }
 
 .section-title span{
-    color:#888;
+    color:var(--muted);
+    font-size:14px;
 }
 
 /* MOVIES */
 
 .movies{
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(215px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(190px,1fr));
     gap:20px;
 }
 
 /* CARD */
 
 .movie{
-    background:#15171f;
-    border:1px solid #292c35;
-    border-radius:17px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:15px;
     overflow:hidden;
-    transition:.25s;
     cursor:pointer;
+    transition:.25s;
 }
 
 .movie:hover{
     transform:translateY(-7px);
-    border-color:#ffd447;
-    box-shadow:0 12px 35px #0008;
+    border-color:var(--accent);
+    box-shadow:0 15px 35px rgba(0,0,0,.25);
 }
 
 /* POSTER */
 
 .poster{
-    height:300px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    text-align:center;
-    padding:20px;
-
-    background:
-    linear-gradient(145deg,#522344,#17131c 65%,#0b0c11);
-
+    height:285px;
     position:relative;
+    overflow:hidden;
+    display:flex;
+    align-items:flex-end;
+    padding:15px;
+    background:
+        linear-gradient(
+            180deg,
+            transparent 35%,
+            rgba(0,0,0,.95)
+        );
 }
 
-.poster::after{
+.poster::before{
     content:"";
     position:absolute;
     inset:0;
-    background:linear-gradient(transparent 55%,#000b);
+    background:
+        radial-gradient(
+            circle at 30% 20%,
+            rgba(255,255,255,.18),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            var(--poster1),
+            var(--poster2)
+        );
+    z-index:0;
 }
 
 .poster-content{
     position:relative;
     z-index:1;
+    width:100%;
 }
 
 .poster-icon{
-    font-size:55px;
-    margin-bottom:15px;
+    position:absolute;
+    top:-245px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:70px;
+    opacity:.8;
 }
 
-.poster-name{
-    font-size:23px;
+.type{
+    display:inline-block;
+    background:var(--accent);
+    color:white;
+    padding:4px 8px;
+    border-radius:5px;
+    font-size:11px;
+    margin-bottom:8px;
+}
+
+.movie-title{
+    font-size:18px;
     font-weight:bold;
-    color:#fff;
 }
 
-/* INFO */
-
-.info{
-    padding:16px;
+.movie-info{
+    padding:14px;
 }
 
-.info h3{
-    margin:0 0 10px;
-    color:#ffd447;
-}
-
-.info p{
-    color:#aaa;
+.meta{
+    display:flex;
+    justify-content:space-between;
+    color:var(--muted);
     font-size:13px;
-    margin:7px 0;
+    margin-bottom:10px;
 }
 
 .rating{
-    color:#ffd447;
-    font-size:14px;
-}
-
-.badge{
-    display:inline-block;
-    margin-top:8px;
-    background:#30270d;
-    color:#ffd447;
-    padding:6px 9px;
-    border-radius:8px;
-    font-size:11px;
-}
-
-/* MODAL */
-
-.modal{
-    display:none;
-    position:fixed;
-    inset:0;
-    z-index:1000;
-    background:#000c;
-    padding:25px;
-    overflow:auto;
-}
-
-.modal.active{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-}
-
-.modal-box{
-    width:min(850px,100%);
-    background:#15171f;
-    border:1px solid #393b45;
-    border-radius:22px;
-    padding:30px;
-    position:relative;
-    box-shadow:0 20px 70px #000;
-}
-
-.close{
-    position:absolute;
-    left:20px;
-    top:15px;
-    border:0;
-    background:#333640;
-    color:#fff;
-    width:38px;
-    height:38px;
-    border-radius:50%;
-    cursor:pointer;
-    font-size:20px;
-}
-
-.modal-title{
-    color:#ffd447;
-    font-size:30px;
-    margin-top:5px;
-}
-
-.modal-info{
-    display:grid;
-    grid-template-columns:1fr 2fr;
-    gap:25px;
-}
-
-.modal-poster{
-    min-height:300px;
-    border-radius:15px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:linear-gradient(145deg,#522344,#111);
-    font-size:27px;
+    color:#ffd43b;
     font-weight:bold;
 }
 
-.modal-text{
-    color:#bbb;
-    line-height:2;
+.genres{
+    display:flex;
+    gap:5px;
+    flex-wrap:wrap;
 }
 
-.actors{
-    color:#ffd447;
-}
-
-/* FOOTER */
-
-footer{
-    margin-top:70px;
-    padding:40px 20px;
-    text-align:center;
-    color:#777;
-    border-top:1px solid #25262d;
-}
-
-footer strong{
-    color:#ffd447;
+.genre{
+    background:var(--card2);
+    color:var(--muted);
+    padding:4px 7px;
+    border-radius:5px;
+    font-size:11px;
 }
 
 /* EMPTY */
 
 .empty{
-    grid-column:1/-1;
     text-align:center;
     padding:50px;
-    color:#888;
+    color:var(--muted);
+    grid-column:1/-1;
 }
 
-/* MOBILE */
+/* MODAL */
 
-@media(max-width:700px){
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.82);
+    z-index:100;
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    background:var(--card);
+    width:min(900px,100%);
+    max-height:90vh;
+    overflow:auto;
+    border-radius:20px;
+    border:1px solid var(--border);
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    left:15px;
+    top:15px;
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:rgba(0,0,0,.6);
+    color:white;
+    font-size:25px;
+    cursor:pointer;
+    z-index:5;
+}
+
+.details{
+    padding:30px;
+}
+
+.detail-header{
+    display:grid;
+    grid-template-columns:230px 1fr;
+    gap:25px;
+}
+
+.detail-poster{
+    height:340px;
+    border-radius:12px;
+    position:relative;
+    overflow:hidden;
+    background:
+        linear-gradient(
+            135deg,
+            var(--poster1),
+            var(--poster2)
+        );
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:80px;
+}
+
+.detail h2{
+    font-size:30px;
+    margin-bottom:12px;
+}
+
+.detail-description{
+    color:var(--muted);
+    line-height:2;
+    margin:20px 0;
+}
+
+.info-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:10px;
+}
+
+.info-box{
+    background:var(--card2);
+    padding:12px;
+    border-radius:9px;
+}
+
+.info-box strong{
+    color:var(--accent);
+}
+
+.cast{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+    margin-top:10px;
+}
+
+.cast span{
+    background:var(--card2);
+    padding:7px 10px;
+    border-radius:8px;
+}
+
+/* FOOTER */
+
+footer{
+    margin-top:60px;
+    padding:35px 20px;
+    text-align:center;
+    border-top:1px solid var(--border);
+    color:var(--muted);
+    line-height:2;
+}
+
+footer strong{
+    color:var(--accent);
+}
+
+/* RESPONSIVE */
+
+@media(max-width:650px){
 
     .logo{
-        font-size:32px;
+        font-size:31px;
     }
 
-    .search-row{
+    .hero h1{
+        font-size:25px;
+    }
+
+    .search-area{
         flex-direction:column;
     }
 
     select{
-        padding:15px;
+        height:48px;
     }
 
     .movies{
@@ -407,37 +472,29 @@ footer strong{
     }
 
     .poster{
-        height:230px;
+        height:240px;
     }
 
-    .poster-name{
-        font-size:17px;
-    }
-
-    .poster-icon{
-        font-size:40px;
-    }
-
-    .info{
-        padding:12px;
-    }
-
-    .info h3{
-        font-size:15px;
-    }
-
-    .modal-info{
+    .detail-header{
         grid-template-columns:1fr;
     }
+
+    .detail-poster{
+        height:300px;
+    }
+
+    .info-grid{
+        grid-template-columns:1fr;
+    }
+
 }
+
 </style>
 </head>
 
 <body>
 
-<!-- HEADER -->
-
-<header class="header">
+<header>
 
     <div class="logo">
         🎬 فیلم‌نما
@@ -452,9 +509,6 @@ footer strong{
     </div>
 
 </header>
-
-
-<!-- NAV -->
 
 <nav>
 
@@ -492,125 +546,120 @@ footer strong{
 
 </nav>
 
-
 <main class="container">
 
-<!-- HERO -->
+    <section class="hero">
 
-<section class="hero">
+        <h1>
+            به فیلم‌نما خوش آمدید 🎬
+        </h1>
 
-    <h1>
-        به فیلم‌نما خوش آمدید 🎬
-    </h1>
+        <p>
+            فیلم‌ها و سریال‌های ایرانی را جستجو کنید،
+            اطلاعات آن‌ها را ببینید و با محبوب‌ترین آثار
+            سینمای ایران آشنا شوید.
+        </p>
 
-    <p>
-        فیلم‌ها و سریال‌های ایرانی را جستجو کنید،
-        اطلاعات آن‌ها را ببینید و با محبوب‌ترین آثار سینمای ایران آشنا شوید.
-    </p>
+    </section>
 
-</section>
+    <div class="search-area">
 
+        <input
+            id="search"
+            class="search"
+            placeholder="🔎 جستجوی فیلم، سریال، بازیگر یا ژانر..."
+            oninput="render()"
+        >
 
-<!-- SEARCH -->
+        <select id="sort" onchange="render()">
 
-<div class="search-row">
+            <option value="new">
+                جدیدترین
+            </option>
 
-    <input
-        id="search"
-        class="search"
-        placeholder="🔎 جستجوی فیلم، سریال، بازیگر یا ژانر..."
-        oninput="render()"
-    >
+            <option value="old">
+                قدیمی‌ترین
+            </option>
 
-    <select id="sort" onchange="render()">
+            <option value="rating">
+                بیشترین امتیاز
+            </option>
 
-        <option value="new">
-            جدیدترین
-        </option>
+            <option value="name">
+                الفبا
+            </option>
 
-        <option value="old">
-            قدیمی‌ترین
-        </option>
-
-        <option value="rating">
-            بیشترین امتیاز
-        </option>
-
-        <option value="name">
-            الفبا
-        </option>
-
-    </select>
-
-</div>
-
-
-<!-- POPULAR -->
-
-<section>
-
-    <div class="section-title">
-
-        <h2>
-            🔥 محبوب‌ترین‌ها
-        </h2>
-
-        <span>
-            انتخاب کاربران
-        </span>
+        </select>
 
     </div>
 
-    <div id="popular" class="movies"></div>
 
-</section>
+    <!-- محبوب ترین -->
 
+    <section class="section">
 
-<!-- NEW -->
+        <div class="section-title">
 
-<section>
+            <h2>
+                🔥 محبوب‌ترین‌ها
+            </h2>
 
-    <div class="section-title">
+            <span>
+                انتخاب کاربران
+            </span>
 
-        <h2>
-            🆕 جدیدترین‌ها
-        </h2>
+        </div>
 
-        <span>
-            آثار جدید
-        </span>
+        <div id="popular" class="movies"></div>
 
-    </div>
-
-    <div id="newMovies" class="movies"></div>
-
-</section>
+    </section>
 
 
-<!-- ALL -->
+    <!-- جدیدترین -->
 
-<section>
+    <section class="section">
 
-    <div class="section-title">
+        <div class="section-title">
 
-        <h2>
-            🎬 همه آثار
-        </h2>
+            <h2>
+                🆕 جدیدترین‌ها
+            </h2>
 
-        <span id="count"></span>
+            <span>
+                آثار جدید
+            </span>
 
-    </div>
+        </div>
 
-    <div id="movies" class="movies"></div>
+        <div id="newMovies" class="movies"></div>
 
-</section>
+    </section>
+
+
+    <!-- همه -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            <h2>
+                🎬 همه آثار
+            </h2>
+
+            <span id="count"></span>
+
+        </div>
+
+        <div id="movies" class="movies"></div>
+
+    </section>
 
 </main>
 
 
 <!-- MODAL -->
 
-<div id="modal" class="modal">
+<div id="modal" class="modal" onclick="outsideClose(event)">
 
     <div class="modal-box">
 
@@ -624,8 +673,6 @@ footer strong{
 
 </div>
 
-
-<!-- FOOTER -->
 
 <footer>
 
@@ -647,479 +694,473 @@ footer strong{
 <script>
 
 /* =========================
-   MOVIE DATABASE
+   DATABASE
 ========================= */
 
 const movies = [
 
 {
-name:"فسیل",
-year:1402,
-type:"فیلم",
-genre:"کمدی",
-rating:8.1,
-actors:"بهرام افشاری، هادی کاظمی، الناز حبیبی",
-story:"داستان گروهی از دوستان و اتفاقات طنزآمیزی که مسیر زندگی آن‌ها را تغییر می‌دهد."
+    id:1,
+    title:"مغزهای کوچک زنگ‌زده",
+    type:"فیلم",
+    year:1396,
+    rating:8.1,
+    genres:["درام","جنایی"],
+    director:"هومن سیدی",
+    writer:"هومن سیدی",
+    producer:"سعید سعدی",
+    duration:"110 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "نوید محمدزاده",
+        "فرهاد اصلانی",
+        "پریناز ایزدیار",
+        "نوید پورفرج"
+    ],
+    description:
+    "داستان گروهی از افراد در یک منطقه حاشیه‌ای که درگیر مسائل پیچیده اجتماعی و جنایی می‌شوند.",
+    icon:"🧠",
+    colors:["#28130d","#9b291e"]
 },
 
 {
-name:"هفتاد سی",
-year:1403,
-type:"فیلم",
-genre:"کمدی",
-rating:7.7,
-actors:"بهرام افشاری، صابر ابر",
-story:"یک کمدی اجتماعی درباره اتفاقات عجیب و تصمیم‌های غیرمنتظره چند شخصیت."
+    id:2,
+    title:"ابد و یک روز",
+    type:"فیلم",
+    year:1394,
+    rating:8.3,
+    genres:["درام","اجتماعی"],
+    director:"سعید روستایی",
+    writer:"سعید روستایی",
+    producer:"سعید ملکان",
+    duration:"110 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "پیمان معادی",
+        "نوید محمدزاده",
+        "پریناز ایزدیار",
+        "ریما رامین‌فر"
+    ],
+    description:
+    "روایت خانواده‌ای درگیر مشکلات اقتصادی و اجتماعی که تصمیمی مهم زندگی اعضای خانواده را تغییر می‌دهد.",
+    icon:"🏠",
+    colors:["#21150d","#c06b31"]
 },
 
 {
-name:"دایناسور",
-year:1403,
-type:"فیلم",
-genre:"کمدی",
-rating:7.5,
-actors:"هنرمندان سینمای ایران",
-story:"یک کمدی ایرانی با موقعیت‌های مختلف و اتفاقات غیرمنتظره."
+    id:3,
+    title:"متری شیش و نیم",
+    type:"فیلم",
+    year:1397,
+    rating:8.0,
+    genres:["جنایی","درام"],
+    director:"سعید روستایی",
+    writer:"سعید روستایی",
+    producer:"سید جمال ساداتیان",
+    duration:"134 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "پیمان معادی",
+        "نوید محمدزاده",
+        "پریناز ایزدیار",
+        "فرهاد اصلانی"
+    ],
+    description:
+    "یک پلیس مبارزه با مواد مخدر در تلاش است تا یکی از بزرگ‌ترین فروشندگان مواد مخدر را پیدا کند.",
+    icon:"🚔",
+    colors:["#101820","#274c77"]
 },
 
 {
-name:"مرد عینکی",
-year:1403,
-type:"فیلم",
-genre:"کمدی",
-rating:7.4,
-actors:"بازیگران سینمای ایران",
-story:"ماجراهای طنز یک شخصیت معمولی که وارد اتفاقاتی عجیب می‌شود."
+    id:4,
+    title:"شنای پروانه",
+    type:"فیلم",
+    year:1398,
+    rating:7.6,
+    genres:["جنایی","درام"],
+    director:"محمد کارت",
+    writer:"محمد کارت",
+    producer:"رسول صدرعاملی",
+    duration:"128 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "جواد عزتی",
+        "طناز طباطبایی",
+        "امیر آقایی",
+        "پانته‌آ بهرام"
+    ],
+    description:
+    "پس از انتشار ویدیویی جنجالی، زندگی یک خانواده وارد مسیر خطرناکی می‌شود.",
+    icon:"🌊",
+    colors:["#061b24","#136f8a"]
 },
 
 {
-name:"کوکتل مولوتف",
-year:1403,
-type:"فیلم",
-genre:"کمدی",
-rating:7.2,
-actors:"بازیگران سینمای ایران",
-story:"یک داستان کمدی با اتفاقات غیرمنتظره و موقعیت‌های طنز."
+    id:5,
+    title:"قورباغه",
+    type:"سریال",
+    year:1399,
+    rating:8.4,
+    genres:["جنایی","درام"],
+    director:"هومن سیدی",
+    writer:"هومن سیدی",
+    producer:"علی اسدزاده",
+    duration:"15 قسمت",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "نوید محمدزاده",
+        "صابر ابر",
+        "سحر دولتشاهی",
+        "هومن سیدی"
+    ],
+    description:
+    "داستان چند دوست که درگیر ماجرایی خطرناک و پیچیده می‌شوند.",
+    icon:"🐸",
+    colors:["#092b19","#247a3d"]
 },
 
 {
-name:"صددام",
-year:1403,
-type:"فیلم",
-genre:"کمدی",
-rating:7.3,
-actors:"بازیگران سینمای ایران",
-story:"داستانی کمدی با محوریت یک ماجرای عجیب و پرحادثه."
+    id:6,
+    title:"زخم کاری",
+    type:"سریال",
+    year:1400,
+    rating:8.2,
+    genres:["جنایی","درام"],
+    director:"محمدحسین مهدویان",
+    writer:"مهدی حسینی‌نیا",
+    producer:"محمدرضا تخت‌کشیان",
+    duration:"چند فصل",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "جواد عزتی",
+        "رعنا آزادی‌ور",
+        "هانیه توسلی",
+        "سعید چنگیزیان"
+    ],
+    description:
+    "داستان قدرت، خیانت و رقابت در یک خانواده ثروتمند و یک مجموعه اقتصادی بزرگ.",
+    icon:"🩸",
+    colors:["#240808","#8d1111"]
 },
 
 {
-name:"پیرپسر",
-year:1403,
-type:"فیلم",
-genre:"درام",
-rating:8.5,
-actors:"حامد بهداد، حسن پورشیرازی",
-story:"داستانی خانوادگی و پرتنش درباره روابط پیچیده اعضای یک خانواده."
+    id:7,
+    title:"فسیل",
+    type:"فیلم",
+    year:1401,
+    rating:7.2,
+    genres:["کمدی"],
+    director:"کریم امینی",
+    writer:"حمزه صالحی",
+    producer:"سید ابراهیم عامریان",
+    duration:"108 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "بهرام افشاری",
+        "ایمان صفا",
+        "هومن حاجی‌عبداللهی",
+        "الناز حبیبی"
+    ],
+    description:
+    "داستان یک گروه موسیقی که اتفاقات مختلفی زندگی آن‌ها را دستخوش تغییر می‌کند.",
+    icon:"🎸",
+    colors:["#32130c","#d87b22"]
 },
 
 {
-name:"مجنون",
-year:1402,
-type:"فیلم",
-genre:"درام",
-rating:8.0,
-actors:"بازیگران سینمای ایران",
-story:"روایتی از فداکاری و مقاومت در دوران جنگ."
+    id:8,
+    title:"تمساح خونی",
+    type:"فیلم",
+    year:1402,
+    rating:7.0,
+    genres:["اکشن","کمدی"],
+    director:"جواد عزتی",
+    writer:"پیمان عباسی",
+    producer:"کامران حجازی",
+    duration:"106 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "جواد عزتی",
+        "عباس جمشیدی‌فر",
+        "الناز حبیبی",
+        "شبنم قربانی"
+    ],
+    description:
+    "دو دوست درگیر اتفاقاتی می‌شوند که مسیر زندگی آن‌ها را وارد ماجراهایی عجیب و خطرناک می‌کند.",
+    icon:"🐊",
+    colors:["#0b2419","#26734d"]
 },
 
 {
-name:"ناتوردشت",
-year:1403,
-type:"فیلم",
-genre:"درام",
-rating:7.9,
-actors:"بازیگران سینمای ایران",
-story:"داستانی اجتماعی و انسانی با محوریت اتفاقاتی تلخ و تأثیرگذار."
+    id:9,
+    title:"پایتخت",
+    type:"سریال",
+    year:1389,
+    rating:8.5,
+    genres:["کمدی","درام"],
+    director:"سیروس مقدم",
+    writer:"محسن تنابنده",
+    producer:"الهام غفوری",
+    duration:"چند فصل",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "محسن تنابنده",
+        "ریما رامین‌فر",
+        "احمد مهرانفر",
+        "علیرضا خمسه"
+    ],
+    description:
+    "داستان خانواده نقی معمولی و اتفاقات طنز و اجتماعی زندگی آن‌ها.",
+    icon:"🏡",
+    colors:["#12305c","#3976b7"]
 },
 
 {
-name:"زیبا صدایم کن",
-year:1403,
-type:"فیلم",
-genre:"درام",
-rating:8.0,
-actors:"بازیگران سینمای ایران",
-story:"داستانی احساسی درباره خانواده و رابطه میان پدر و فرزند."
+    id:10,
+    title:"هیولا",
+    type:"سریال",
+    year:1398,
+    rating:7.7,
+    genres:["کمدی","اجتماعی"],
+    director:"مهران مدیری",
+    writer:"پیمان قاسم‌خانی",
+    producer:"مصطفی احمدی",
+    duration:"19 قسمت",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "فرهاد اصلانی",
+        "شبنم مقدمی",
+        "مهران مدیری",
+        "گوهر خیراندیش"
+    ],
+    description:
+    "داستان فردی ساده و درستکار که در مسیر زندگی با فساد و مشکلات اجتماعی روبه‌رو می‌شود.",
+    icon:"👹",
+    colors:["#25170a","#b46c20"]
 },
 
 {
-name:"متری شیش و نیم",
-year:1397,
-type:"فیلم",
-genre:"جنایی",
-rating:9.0,
-actors:"پیمان معادی، نوید محمدزاده",
-story:"یک پلیس به دنبال دستگیری یک فروشنده بزرگ مواد مخدر است."
+    id:11,
+    title:"دینامیت",
+    type:"فیلم",
+    year:1400,
+    rating:7.0,
+    genres:["کمدی"],
+    director:"مسعود اطیابی",
+    writer:"حمزه صالحی",
+    producer:"ابراهیم عامریان",
+    duration:"100 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "احمد مهرانفر",
+        "پژمان جمشیدی",
+        "محسن کیایی",
+        "نادر سلیمانی"
+    ],
+    description:
+    "دو طلبه جوان در ساختمانی با همسایگانی متفاوت با سبک زندگی‌های کاملاً متضاد روبه‌رو می‌شوند.",
+    icon:"💣",
+    colors:["#321a08","#d38b22"]
 },
 
 {
-name:"شنای پروانه",
-year:1398,
-type:"فیلم",
-genre:"جنایی",
-rating:8.4,
-actors:"جواد عزتی، امیر آقایی، طناز طباطبایی",
-story:"پس از انتشار یک ویدئو، اتفاقاتی زنجیره‌ای در یک محله آغاز می‌شود."
-},
-
-{
-name:"مغزهای کوچک زنگ زده",
-year:1396,
-type:"فیلم",
-genre:"جنایی",
-rating:8.7,
-actors:"نوید محمدزاده، فرهاد اصلانی، پریناز ایزدیار",
-story:"داستان زندگی چند برادر در حاشیه شهر و درگیری آن‌ها با جرم و خشونت."
-},
-
-{
-name:"لاتاری",
-year:1396,
-type:"فیلم",
-genre:"جنایی",
-rating:8.1,
-actors:"محمدحسین مهدویان، ساعد سهیلی، هادی حجازی‌فر",
-story:"داستان جوانی که برای گرفتن حق یک قربانی وارد مسیری خطرناک می‌شود."
-},
-
-{
-name:"عنکبوت",
-year:1398,
-type:"فیلم",
-genre:"جنایی",
-rating:7.6,
-actors:"محسن تنابنده، ساره بیات",
-story:"داستان جنایی درباره مردی که وارد مسیری تاریک می‌شود."
-},
-
-{
-name:"روز صفر",
-year:1398,
-type:"فیلم",
-genre:"اکشن",
-rating:8.3,
-actors:"امیر جدیدی، ساعد سهیلی",
-story:"داستان یک عملیات امنیتی پیچیده و مقابله با یک تهدید بزرگ."
-},
-
-{
-name:"به وقت شام",
-year:1396,
-type:"فیلم",
-genre:"اکشن",
-rating:7.9,
-actors:"بابک حمیدیان، هادی حجازی‌فر",
-story:"ماجرای دو خلبان که در منطقه‌ای جنگ‌زده با شرایط خطرناکی روبه‌رو می‌شوند."
-},
-
-{
-name:"تنگه ابوقریب",
-year:1396,
-type:"فیلم",
-genre:"اکشن",
-rating:8.6,
-actors:"جواد عزتی، امیر جدیدی، مهدی پاکدل",
-story:"روایتی از مقاومت رزمندگان در یکی از عملیات‌های دوران جنگ."
-},
-
-{
-name:"ابد و یک روز",
-year:1394,
-type:"فیلم",
-genre:"درام",
-rating:9.1,
-actors:"پیمان معادی، نوید محمدزاده، پریناز ایزدیار",
-story:"داستان یک خانواده درگیر مشکلات اقتصادی، اعتیاد و تصمیمی مهم برای آینده."
-},
-
-{
-name:"قهرمان",
-year:1400,
-type:"فیلم",
-genre:"درام",
-rating:8.5,
-actors:"امیر جدیدی، محسن تنابنده",
-story:"مردی که در شرایط دشوار تلاش می‌کند اعتبار و زندگی خود را حفظ کند."
-},
-
-{
-name:"برادران لیلا",
-year:1400,
-type:"فیلم",
-genre:"درام",
-rating:8.6,
-actors:"ترانه علیدوستی، نوید محمدزاده، پیمان معادی",
-story:"داستان خانواده‌ای که درگیر مشکلات اقتصادی و اختلافات خانوادگی می‌شوند."
-},
-
-{
-name:"جنگ جهانی سوم",
-year:1401,
-type:"فیلم",
-genre:"درام",
-rating:8.4,
-actors:"محسن تنابنده",
-story:"زندگی یک کارگر ساده با ورود یک پروژه سینمایی به شکل عجیبی تغییر می‌کند."
-},
-
-{
-name:"سرخ‌پوست",
-year:1397,
-type:"فیلم",
-genre:"درام",
-rating:8.5,
-actors:"نوید محمدزاده، پریناز ایزدیار",
-story:"در یک زندان قدیمی اتفاقی غیرمنتظره باعث می‌شود رئیس زندان با چالشی جدی روبه‌رو شود."
-},
-
-{
-name:"شبی که ماه کامل شد",
-year:1397,
-type:"فیلم",
-genre:"درام",
-rating:9.0,
-actors:"الناز شاکردوست، هوتن شکیبا",
-story:"داستان زندگی زنی که ازدواجش او را وارد ماجراهایی خطرناک می‌کند."
-},
-
-{
-name:"آتابای",
-year:1398,
-type:"فیلم",
-genre:"درام",
-rating:8.0,
-actors:"هادی حجازی‌فر، سحر دولتشاهی",
-story:"داستان مردی در یک روستای آذری‌زبان و روابط پیچیده زندگی او."
-},
-
-/* SERIES */
-
-{
-name:"پایتخت",
-year:1389,
-type:"سریال",
-genre:"کمدی",
-rating:9.2,
-actors:"محسن تنابنده، احمد مهرانفر، ریما رامین‌فر",
-story:"داستان خانواده نقی معمولی و اتفاقات طنز و خانوادگی آن‌ها."
-},
-
-{
-name:"زخم کاری",
-year:1400,
-type:"سریال",
-genre:"جنایی",
-rating:8.8,
-actors:"جواد عزتی، رعنا آزادی‌ور",
-story:"یک داستان جنایی و خانوادگی درباره قدرت، ثروت و خیانت."
-},
-
-{
-name:"یاغی",
-year:1401,
-type:"سریال",
-genre:"درام",
-rating:8.7,
-actors:"علی شادمان، پارسا پیروزفر",
-story:"جوانی از طبقه پایین جامعه برای تغییر زندگی خود وارد مسیری سخت می‌شود."
-},
-
-{
-name:"پوست شیر",
-year:1401,
-type:"سریال",
-genre:"جنایی",
-rating:9.0,
-actors:"شهاب حسینی، هادی حجازی‌فر",
-story:"مردی پس از سال‌ها زندان با اتفاقی تلخ برای خانواده‌اش روبه‌رو می‌شود."
-},
-
-{
-name:"قورباغه",
-year:1399,
-type:"سریال",
-genre:"جنایی",
-rating:8.4,
-actors:"نوید محمدزاده، صابر ابر",
-story:"چند دوست وارد ماجرایی می‌شوند که زندگی همه آن‌ها را تغییر می‌دهد."
+    id:12,
+    title:"روز صفر",
+    type:"فیلم",
+    year:1398,
+    rating:7.8,
+    genres:["اکشن","جنایی"],
+    director:"سعید ملکان",
+    writer:"بهروز افخمی",
+    producer:"سعید ملکان",
+    duration:"110 دقیقه",
+    country:"ایران",
+    language:"فارسی",
+    cast:[
+        "امیر جدیدی",
+        "ساعد سهیلی",
+        "تینو صالحی",
+        "مهدی قربانی"
+    ],
+    description:
+    "یک مأمور امنیتی مأموریتی حساس برای مقابله با یک تهدید امنیتی را دنبال می‌کند.",
+    icon:"🎯",
+    colors:["#111820","#47515c"]
 }
 
 ];
 
 
 /* =========================
-   STATE
+   VARIABLES
 ========================= */
 
-let currentCategory="همه";
+let category = "همه";
 
 
 /* =========================
-   CATEGORY
+   CREATE CARD
 ========================= */
 
-function setCategory(category,button){
-
-    currentCategory=category;
-
-    document
-    .querySelectorAll("nav button")
-    .forEach(btn=>{
-        btn.classList.remove("active");
-    });
-
-    button.classList.add("active");
-
-    render();
-}
-
-
-/* =========================
-   SEARCH + FILTER
-========================= */
-
-function getFiltered(){
-
-    const query=document
-    .getElementById("search")
-    .value
-    .trim()
-    .toLowerCase();
-
-    let result=movies.filter(movie=>{
-
-        let categoryMatch=true;
-
-        if(currentCategory==="فیلم" ||
-           currentCategory==="سریال"){
-
-            categoryMatch=
-            movie.type===currentCategory;
-
-        }
-        else if(currentCategory!=="همه"){
-
-            categoryMatch=
-            movie.genre===currentCategory;
-
-        }
-
-        const searchable=
-        (
-            movie.name+
-            movie.genre+
-            movie.type+
-            movie.actors+
-            movie.story
-        ).toLowerCase();
-
-        return categoryMatch &&
-               searchable.includes(query);
-
-    });
-
-
-    const sort=document
-    .getElementById("sort").value;
-
-
-    if(sort==="new"){
-
-        result.sort((a,b)=>b.year-a.year);
-
-    }
-
-    else if(sort==="old"){
-
-        result.sort((a,b)=>a.year-b.year);
-
-    }
-
-    else if(sort==="rating"){
-
-        result.sort((a,b)=>b.rating-a.rating);
-
-    }
-
-    else if(sort==="name"){
-
-        result.sort((a,b)=>
-            a.name.localeCompare(b.name,"fa")
-        );
-
-    }
-
-    return result;
-}
-
-
-/* =========================
-   CARD
-========================= */
-
-function createCard(movie){
+function card(movie){
 
     return `
 
     <article
         class="movie"
-        onclick="openMovie('${movie.name}')"
+        onclick="openMovie(${movie.id})"
     >
 
-        <div class="poster">
+        <div
+            class="poster"
+            style="
+                --poster1:${movie.colors[0]};
+                --poster2:${movie.colors[1]};
+            "
+        >
 
             <div class="poster-content">
 
                 <div class="poster-icon">
-                    ${movie.type==="سریال" ? "📺" : "🎬"}
+                    ${movie.icon}
                 </div>
 
-                <div class="poster-name">
-                    ${movie.name}
+                <span class="type">
+                    ${movie.type}
+                </span>
+
+                <div class="movie-title">
+                    ${movie.title}
                 </div>
 
             </div>
 
         </div>
 
+        <div class="movie-info">
 
-        <div class="info">
+            <div class="meta">
 
-            <h3>
-                ${movie.name}
-            </h3>
+                <span>
+                    ${movie.year}
+                </span>
 
-            <p>
-                📅 ${movie.year}
-            </p>
+                <span class="rating">
+                    ⭐ ${movie.rating}
+                </span>
 
-            <p>
-                🎭 ${movie.genre}
-            </p>
-
-            <div class="rating">
-                ⭐ ${movie.rating}/10
             </div>
 
-            <span class="badge">
-                ${movie.type}
-            </span>
+            <div class="genres">
+
+                ${movie.genres.map(
+                    g => `<span class="genre">${g}</span>`
+                ).join("")}
+
+            </div>
 
         </div>
 
     </article>
 
     `;
+}
+
+
+/* =========================
+   FILTER
+========================= */
+
+function filteredMovies(){
+
+    const search =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+    let result = movies.filter(movie => {
+
+        const categoryMatch =
+            category === "همه" ||
+            movie.type === category ||
+            movie.genres.includes(category);
+
+        const searchable = [
+
+            movie.title,
+            movie.type,
+            movie.director,
+            movie.writer,
+            movie.producer,
+            movie.description,
+            ...movie.genres,
+            ...movie.cast
+
+        ].join(" ").toLowerCase();
+
+        const searchMatch =
+            !search ||
+            searchable.includes(search);
+
+        return categoryMatch && searchMatch;
+
+    });
+
+
+    const sort =
+        document.getElementById("sort").value;
+
+
+    if(sort === "new"){
+
+        result.sort(
+            (a,b) => b.year-a.year
+        );
+
+    }
+
+    else if(sort === "old"){
+
+        result.sort(
+            (a,b) => a.year-b.year
+        );
+
+    }
+
+    else if(sort === "rating"){
+
+        result.sort(
+            (a,b) => b.rating-a.rating
+        );
+
+    }
+
+    else if(sort === "name"){
+
+        result.sort(
+            (a,b) =>
+            a.title.localeCompare(
+                b.title,
+                "fa"
+            )
+        );
+
+    }
+
+    return result;
 
 }
 
@@ -1130,168 +1171,235 @@ function createCard(movie){
 
 function render(){
 
-    const list=getFiltered();
-
-    document
-    .getElementById("count")
-    .textContent=
-    `${list.length} اثر`;
+    const result =
+        filteredMovies();
 
 
-    document
-    .getElementById("movies")
-    .innerHTML=
-
-    list.length
-    ?
-    list.map(createCard).join("")
-    :
-    `<div class="empty">
-        😔 چیزی پیدا نشد
-     </div>`;
+    document.getElementById("movies")
+        .innerHTML =
+        result.length
+        ? result.map(card).join("")
+        : `<div class="empty">
+                😔 چیزی پیدا نشد
+           </div>`;
 
 
-    /* POPULAR */
-
-    const popular=[...movies]
-    .sort((a,b)=>b.rating-a.rating)
-    .slice(0,6);
+    document.getElementById("count")
+        .textContent =
+        `${result.length} اثر`;
 
 
-    document
-    .getElementById("popular")
-    .innerHTML=
-    popular.map(createCard).join("");
+    const popular =
+        [...movies]
+        .sort(
+            (a,b) => b.rating-a.rating
+        )
+        .slice(0,6);
 
 
-    /* NEW */
-
-    const newest=[...movies]
-    .sort((a,b)=>b.year-a.year)
-    .slice(0,6);
+    document.getElementById("popular")
+        .innerHTML =
+        popular.map(card).join("");
 
 
-    document
-    .getElementById("newMovies")
-    .innerHTML=
-    newest.map(createCard).join("");
+    const newest =
+        [...movies]
+        .sort(
+            (a,b) => b.year-a.year
+        )
+        .slice(0,6);
+
+
+    document.getElementById("newMovies")
+        .innerHTML =
+        newest.map(card).join("");
 
 }
 
 
 /* =========================
-   MOVIE PAGE / MODAL
+   CATEGORY
 ========================= */
 
-function openMovie(name){
+function setCategory(name,button){
 
-    const movie=
-    movies.find(m=>m.name===name);
+    category = name;
+
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn =>
+            btn.classList.remove("active")
+        );
+
+
+    button.classList.add("active");
+
+
+    render();
+
+}
+
+
+/* =========================
+   MODAL
+========================= */
+
+function openMovie(id){
+
+    const movie =
+        movies.find(
+            item => item.id === id
+        );
 
     if(!movie) return;
 
 
-    document
-    .getElementById("modalContent")
-    .innerHTML=
+    document.getElementById("modalContent")
+        .innerHTML = `
 
-    `
+        <div class="details">
 
-    <h1 class="modal-title">
-        ${movie.name}
-    </h1>
+            <div class="detail-header">
 
-    <div class="modal-info">
+                <div
+                    class="detail-poster"
+                    style="
+                        --poster1:${movie.colors[0]};
+                        --poster2:${movie.colors[1]};
+                    "
+                >
+                    ${movie.icon}
+                </div>
 
-        <div class="modal-poster">
 
-            <div>
-                ${movie.type==="سریال" ? "📺" : "🎬"}
+                <div class="detail">
 
-                <br><br>
+                    <span class="type">
+                        ${movie.type}
+                    </span>
 
-                ${movie.name}
+                    <h2>
+                        ${movie.title}
+                    </h2>
+
+                    <div class="rating">
+                        ⭐ ${movie.rating} / 10
+                    </div>
+
+
+                    <p class="detail-description">
+                        ${movie.description}
+                    </p>
+
+
+                    <div class="info-grid">
+
+                        <div class="info-box">
+                            <strong>سال:</strong>
+                            ${movie.year}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>مدت:</strong>
+                            ${movie.duration}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>کارگردان:</strong>
+                            ${movie.director}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>نویسنده:</strong>
+                            ${movie.writer}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>تهیه‌کننده:</strong>
+                            ${movie.producer}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>کشور:</strong>
+                            ${movie.country}
+                        </div>
+
+                        <div class="info-box">
+                            <strong>زبان:</strong>
+                            ${movie.language}
+                        </div>
+
+                    </div>
+
+
+                    <br>
+
+                    <strong>
+                        🎭 بازیگران
+                    </strong>
+
+                    <div class="cast">
+
+                        ${movie.cast.map(
+                            actor =>
+                            `<span>${actor}</span>`
+                        ).join("")}
+
+                    </div>
+
+                </div>
 
             </div>
 
         </div>
 
-
-        <div class="modal-text">
-
-            <p>
-                <strong>نوع:</strong>
-                ${movie.type}
-            </p>
-
-            <p>
-                <strong>سال:</strong>
-                ${movie.year}
-            </p>
-
-            <p>
-                <strong>ژانر:</strong>
-                ${movie.genre}
-            </p>
-
-            <p>
-                <strong>امتیاز:</strong>
-                ⭐ ${movie.rating}/10
-            </p>
-
-            <p>
-                <strong>بازیگران:</strong>
-                <span class="actors">
-                    ${movie.actors}
-                </span>
-            </p>
-
-            <hr>
-
-            <h3 style="color:#ffd447">
-                📖 داستان
-            </h3>
-
-            <p>
-                ${movie.story}
-            </p>
-
-        </div>
-
-    </div>
-
-    `;
+        `;
 
 
     document
-    .getElementById("modal")
-    .classList.add("active");
+        .getElementById("modal")
+        .classList.add("show");
+
+    document.body.style.overflow="hidden";
 
 }
 
 
 /* =========================
-   CLOSE
+   CLOSE MODAL
 ========================= */
 
 function closeModal(){
 
     document
-    .getElementById("modal")
-    .classList.remove("active");
+        .getElementById("modal")
+        .classList.remove("show");
+
+    document.body.style.overflow="";
 
 }
 
 
-document
-.getElementById("modal")
-.addEventListener("click",function(e){
+function outsideClose(event){
 
-    if(e.target===this){
+    if(event.target.id === "modal"){
         closeModal();
     }
 
-});
+}
+
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+            closeModal();
+        }
+
+    }
+);
 
 
 /* =========================
@@ -1300,31 +1408,26 @@ document
 
 function toggleTheme(){
 
-    document
-    .body
-    .classList
-    .toggle("light");
+    document.body.classList.toggle("light");
 
-    const light=
-    document
-    .body
-    .classList
-    .contains("light");
+    const light =
+        document.body.classList.contains("light");
 
     localStorage.setItem(
-        "filmTheme",
+        "filmnama-theme",
         light ? "light" : "dark"
     );
 
 }
 
 
-if(localStorage.getItem("filmTheme")==="light"){
+if(
+    localStorage.getItem(
+        "filmnama-theme"
+    ) === "light"
+){
 
-    document
-    .body
-    .classList
-    .add("light");
+    document.body.classList.add("light");
 
 }
 
