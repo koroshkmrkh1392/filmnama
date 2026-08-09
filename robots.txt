@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://koroshkmrkh1392.github.io/filmnama/sitemap.xml
