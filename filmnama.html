@@ -1,0 +1,586 @@
+```html
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>فیلم‌نما | ساخته کوروش غلامی</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Tahoma, Arial, sans-serif;
+    background: #08090d;
+    color: white;
+}
+
+/* Header */
+header {
+    background: linear-gradient(135deg, #17101f, #310d22);
+    padding: 35px 20px;
+    text-align: center;
+    border-bottom: 1px solid #3b263b;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 38px;
+    color: #ffc928;
+}
+
+header p {
+    color: #aaa;
+    margin: 12px 0 0;
+}
+
+.creator {
+    color: #ffc928 !important;
+    font-size: 15px;
+}
+
+/* Navigation */
+nav {
+    background: #111218;
+    padding: 18px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav button {
+    background: #242631;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 11px 20px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+nav button:hover,
+nav button.active {
+    background: #ffc928;
+    color: #111;
+}
+
+/* Container */
+.container {
+    width: 92%;
+    max-width: 1250px;
+    margin: 35px auto;
+}
+
+/* Search */
+.search {
+    width: 100%;
+    padding: 16px 20px;
+    border-radius: 14px;
+    border: 1px solid #333641;
+    outline: none;
+    background: #15161d;
+    color: white;
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.search:focus {
+    border-color: #ffc928;
+}
+
+/* Movie Grid */
+.movies {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 22px;
+}
+
+/* Movie Card */
+.movie {
+    background: #15161d;
+    border: 1px solid #282a34;
+    border-radius: 17px;
+    overflow: hidden;
+    transition: 0.25s;
+}
+
+.movie:hover {
+    transform: translateY(-7px);
+    border-color: #ffc928;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
+
+/* Poster */
+.poster {
+    height: 300px;
+    background: linear-gradient(145deg, #282936, #111217);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bold;
+    color: #ddd;
+}
+
+.poster span {
+    font-size: 45px;
+    display: block;
+    margin-bottom: 15px;
+}
+
+/* Movie Info */
+.info {
+    padding: 17px;
+}
+
+.info h2 {
+    margin: 0 0 12px;
+    color: #ffd447;
+    font-size: 20px;
+}
+
+.info p {
+    margin: 8px 0;
+    color: #aaa;
+    font-size: 14px;
+}
+
+.genre {
+    display: inline-block;
+    margin-top: 8px;
+    background: #30270c;
+    color: #ffd447;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+}
+
+/* Footer */
+footer {
+    margin-top: 60px;
+    padding: 35px;
+    text-align: center;
+    color: #777;
+    border-top: 1px solid #22242b;
+}
+
+footer strong {
+    color: #ffd447;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+    header h1 {
+        font-size: 30px;
+    }
+
+    .movies {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    .poster {
+        height: 230px;
+        font-size: 18px;
+    }
+
+    .info h2 {
+        font-size: 16px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+
+    <h1>🎬 فیلم‌نما</h1>
+
+    <p>
+        مرجع معرفی و نمایش اطلاعات فیلم‌ها و سریال‌های ایرانی
+    </p>
+
+    <p class="creator">
+        ساخته کوروش غلامی
+    </p>
+
+</header>
+
+
+<nav>
+
+    <button class="active" onclick="filterMovies('همه', this)">
+        همه
+    </button>
+
+    <button onclick="filterMovies('کمدی', this)">
+        کمدی
+    </button>
+
+    <button onclick="filterMovies('درام', this)">
+        درام
+    </button>
+
+    <button onclick="filterMovies('جنایی', this)">
+        جنایی
+    </button>
+
+    <button onclick="filterMovies('اکشن', this)">
+        اکشن
+    </button>
+
+    <button onclick="filterMovies('اجتماعی', this)">
+        اجتماعی
+    </button>
+
+</nav>
+
+
+<div class="container">
+
+    <input
+        id="search"
+        class="search"
+        type="text"
+        placeholder="🔎 نام فیلم را جستجو کنید..."
+        oninput="renderMovies()"
+    >
+
+    <div id="movies" class="movies"></div>
+
+</div>
+
+
+<footer>
+
+    <p>
+        🎬 فیلم‌نما
+    </p>
+
+    <p>
+        تمامی حقوق این سایت محفوظ است
+    </p>
+
+    <p>
+        <strong>ساخته کوروش غلامی</strong>
+    </p>
+
+</footer>
+
+
+<script>
+
+const movies = [
+
+    {
+        name: "فسیل",
+        year: "۱۴۰۲",
+        genre: "کمدی"
+    },
+
+    {
+        name: "هفتاد سی",
+        year: "۱۴۰۳",
+        genre: "کمدی"
+    },
+
+    {
+        name: "دایناسور",
+        year: "۱۴۰۳",
+        genre: "کمدی"
+    },
+
+    {
+        name: "مرد عینکی",
+        year: "۱۴۰۳",
+        genre: "کمدی"
+    },
+
+    {
+        name: "کوکتل مولوتف",
+        year: "۱۴۰۳",
+        genre: "کمدی"
+    },
+
+    {
+        name: "صددام",
+        year: "۱۴۰۳",
+        genre: "کمدی"
+    },
+
+    {
+        name: "پیرپسر",
+        year: "۱۴۰۳",
+        genre: "درام"
+    },
+
+    {
+        name: "مجنون",
+        year: "۱۴۰۲",
+        genre: "درام"
+    },
+
+    {
+        name: "ناتوردشت",
+        year: "۱۴۰۳",
+        genre: "درام"
+    },
+
+    {
+        name: "زیبا صدایم کن",
+        year: "۱۴۰۳",
+        genre: "درام"
+    },
+
+    {
+        name: "موقعیت مهدی",
+        year: "۱۴۰۰",
+        genre: "درام"
+    },
+
+    {
+        name: "قهرمان",
+        year: "۱۴۰۰",
+        genre: "درام"
+    },
+
+    {
+        name: "برادران لیلا",
+        year: "۱۴۰۰",
+        genre: "درام"
+    },
+
+    {
+        name: "جنگ جهانی سوم",
+        year: "۱۴۰۱",
+        genre: "درام"
+    },
+
+    {
+        name: "سرخ‌پوست",
+        year: "۱۳۹۷",
+        genre: "درام"
+    },
+
+    {
+        name: "متری شیش و نیم",
+        year: "۱۳۹۷",
+        genre: "جنایی"
+    },
+
+    {
+        name: "شنای پروانه",
+        year: "۱۳۹۸",
+        genre: "جنایی"
+    },
+
+    {
+        name: "مغزهای کوچک زنگ زده",
+        year: "۱۳۹۶",
+        genre: "جنایی"
+    },
+
+    {
+        name: "لاتاری",
+        year: "۱۳۹۶",
+        genre: "جنایی"
+    },
+
+    {
+        name: "عنکبوت",
+        year: "۱۳۹۸",
+        genre: "جنایی"
+    },
+
+    {
+        name: "روز صفر",
+        year: "۱۳۹۸",
+        genre: "اکشن"
+    },
+
+    {
+        name: "به وقت شام",
+        year: "۱۳۹۶",
+        genre: "اکشن"
+    },
+
+    {
+        name: "تنگه ابوقریب",
+        year: "۱۳۹۶",
+        genre: "اکشن"
+    },
+
+    {
+        name: "ابد و یک روز",
+        year: "۱۳۹۴",
+        genre: "اجتماعی"
+    },
+
+    {
+        name: "بچه مردم",
+        year: "۱۴۰۳",
+        genre: "اجتماعی"
+    },
+
+    {
+        name: "خورشید",
+        year: "۱۳۹۸",
+        genre: "اجتماعی"
+    },
+
+    {
+        name: "درخت گردو",
+        year: "۱۳۹۸",
+        genre: "درام"
+    },
+
+    {
+        name: "شبی که ماه کامل شد",
+        year: "۱۳۹۷",
+        genre: "درام"
+    },
+
+    {
+        name: "آتابای",
+        year: "۱۳۹۸",
+        genre: "درام"
+    }
+
+];
+
+
+let currentCategory = "همه";
+
+
+function filterMovies(category, button) {
+
+    currentCategory = category;
+
+    document
+        .querySelectorAll("nav button")
+        .forEach(btn => btn.classList.remove("active"));
+
+    button.classList.add("active");
+
+    renderMovies();
+}
+
+
+function renderMovies() {
+
+    const searchText =
+        document
+        .getElementById("search")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    const filteredMovies = movies.filter(movie => {
+
+        const categoryMatch =
+            currentCategory === "همه" ||
+            movie.genre === currentCategory;
+
+        const searchMatch =
+            movie.name
+            .toLowerCase()
+            .includes(searchText);
+
+        return categoryMatch && searchMatch;
+
+    });
+
+
+    const container =
+        document.getElementById("movies");
+
+
+    if (filteredMovies.length === 0) {
+
+        container.innerHTML =
+            `
+            <div style="
+                grid-column:1/-1;
+                text-align:center;
+                padding:50px;
+                color:#888;
+            ">
+                😔 فیلمی پیدا نشد
+            </div>
+            `;
+
+        return;
+    }
+
+
+    container.innerHTML =
+        filteredMovies.map(movie => {
+
+            return `
+
+            <div class="movie">
+
+                <div class="poster">
+
+                    <div>
+
+                        <span>🎬</span>
+
+                        ${movie.name}
+
+                    </div>
+
+                </div>
+
+
+                <div class="info">
+
+                    <h2>
+                        ${movie.name}
+                    </h2>
+
+                    <p>
+                        📅 سال ساخت:
+                        ${movie.year}
+                    </p>
+
+                    <p>
+                        🎭 ژانر:
+                        ${movie.genre}
+                    </p>
+
+                    <span class="genre">
+                        اطلاعات فیلم
+                    </span>
+
+                </div>
+
+            </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+renderMovies();
+
+</script>
+
+</body>
+</html>
+```
